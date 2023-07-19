@@ -6,8 +6,6 @@ const Signup = () => {
   const [server_error, setServerError] = useState({})
   const navigate = useNavigate();
   const [registerUser, { isLoading }] = useRegisterUserMutation()
-
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
@@ -32,12 +30,11 @@ const Signup = () => {
       navigate("/dashboard")
     }
   }
-
   return (
     <>
       {server_error.non_field_errors ? console.log(server_error.non_field_errors[0]) : ""}
-      <div className="max-w-2xl mx-auto mt-10">
-        <h1 className="text-2xl font-bold mb-6 text-center">Sign up Form</h1>
+      <div className="max-w-2xl bg-white p-4 mx-auto mt-10 shadow-2xl mb-20">
+        <h1 className="text-2xl font-bold mb-6 text-center">Signup Form</h1>
         <form onSubmit={handleSubmit}>
           <div className="grid xl:grid-cols-2 xl:gap-6">
             <div className="relative z-0 mb-6 w-full group">
@@ -88,20 +85,22 @@ const Signup = () => {
             <label for="password2" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Confirm password</label>
             {server_error.password2 ? <p className='text-sm text-red-400'>{server_error.password2[0]}</p> : ""}
           </div>
-          <div className="relative z-0 mb-6 w-full group">
-            <input type="file" name="image" id="image" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
-            <label for="image" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Profile</label>
-            {server_error.image ? <p className='text-sm text-red-400'>{server_error.image[0]}</p> : ""}
+          <div class="mb-6 pt-4">
+            <label class="mb-5 block text-xl font-semibold text-[#07074D]"> Profile</label>
+            <div class="mb-8">
+              <input type="file" name="image" id="image" class="sr-only" />
+              <label for="image" class="relative flex min-h-[200px] items-center justify-center rounded-md border border-dashed border-[#e0e0e0] p-12 text-center">
+                <div class="inline-flex rounded border border-[#e0e0e0] py-2 px-7 text-base font-medium text-[#07074D]">Browse</div>
+              </label>
+              {server_error.image ? <p className='text-sm text-red-400'>{server_error.image[0]}</p> : ""}
+            </div>
           </div>
-
-          <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
-
+          <div class="relative flex  flex-col  justify-center">
+            <button class="bg-gradient-to-b w-max mx-auto text-blue-500 font-semibold from-slate-50 to-blue-100 px-10 py-2 rounded-2xl shadow-blue-400 shadow-md border-b-4 hover border-b border-blue-200 hover:shadow-sm transition-all duration-500">Register</button>
+          </div>
           {server_error.non_field_errors ? <Alert severity="error">This is an error alert — check it out!</Alert> : ""}
         </form>
-
-
       </div>
-
     </>
   )
 }

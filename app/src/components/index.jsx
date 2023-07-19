@@ -1,5 +1,3 @@
-
-// export { default as Button } from './Button';
 export { default as Home } from './Home';
 export { default as Sidebar } from './Sidebar';
 export { default as Navbar } from './Navbar';

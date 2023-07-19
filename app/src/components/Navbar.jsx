@@ -3,7 +3,6 @@ import { AiOutlineMenu } from 'react-icons/ai';
 import { RiNotification3Line } from 'react-icons/ri';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import Tooltip from '@mui/material/Tooltip';
-//import { Cart, Chat, Notification, UserProfile } from '.';
 import { useStateContext } from '../contexts/ContextProvider';
 import { getToken } from '../services/localStorage';
 
@@ -27,9 +26,7 @@ const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
 const Navbar = () => {
   const { access_token } = getToken()
   const { currentColor, activeMenu, setActiveMenu, handleClick } = useStateContext();
-
   const handleActiveMenu = () => setActiveMenu(!activeMenu);
-
   return (
     <div className="flex bg-white justify-between relative shadow-lg">
 
@@ -54,11 +51,9 @@ const Navbar = () => {
                 </span>
               </p>
               <MdKeyboardArrowDown className="text-gray-400 text-14" />
-
             </div>
             : ''}
         </Tooltip>
-
       </div>
     </div>
   );

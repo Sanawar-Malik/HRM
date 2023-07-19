@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Navigate, NavLink, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { SiShopware } from 'react-icons/si';
 import { MdOutlineCancel } from 'react-icons/md';
 import Tooltip from '@mui/material/Tooltip';
@@ -23,18 +23,17 @@ const Sidebar = () => {
   }
   const { access_token } = getToken()
   const { currentColor, activeMenu, setActiveMenu, screenSize } = useStateContext();
-
   const handleCloseSideBar = () => {
     if (activeMenu !== undefined && screenSize <= 900) {
       setActiveMenu(false);
     }
   };
 
-  const activeLink = 'flex items-center text-center gap-5 pl-2 pt-2 pb-2 rounded-lg text-bold text-white  text-md m-2 bg-black';
-  const normalLink = 'flex items-center gap-5 pl-2 pt-2 pb-2 rounded-lg font-bold text-sm  text-black bg-gray-200 text-black hover:bg-light-gray m-2';
+  const activeLink = 'flex items-center text-center gap-5 pl-2 pt-2 pb-2 rounded-lg  font-bold text-fuchsia-600 - purple-600  text-md m-2 bg-white';
+  const normalLink = 'flex items-center gap-5 pl-2 pt-2 pb-2 rounded-lg font-bold text-sm  text-black bg-slate-50 text-black hover:bg-light-gray m-2';
 
   return (
-    <div className=" h-screen bg-black-500 border-2 md:overflow-hidden overflow-auto md:hover:overflow-auto pb-10 shadow-inner">
+    <div className=" h-screen bg-white md:overflow-hidden overflow-auto md:hover:overflow-auto pb-10 shadow-inner">
       {activeMenu && (
         <>
           <div className="flex justify-between items-center">
