@@ -12,7 +12,7 @@ export const userAuthapi = createApi({
           body: JSON.stringify(user),
           headers: {
             'Accept': 'application/json',
-            'Content-Type': 'multipart/form-data; boundary',
+            'Content-Type': 'multipart/form-data',
           }
         }
       }
