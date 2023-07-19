@@ -75,13 +75,13 @@ WSGI_APPLICATION = 'main.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'hrm',
+        'NAME': 'malik',
         'USER': 'root',
         'PASSWORD': 'password',
-        'HOST':'localhost',
-        'PORT':'5432'
+        'HOST': 'localhost',
+        'PORT': '5432'
     }
-    
+
 }
 # DATABASE_ROUTERS = ['account.router.AuthRouter', 'worker.router.ListingRouter']
 
@@ -118,16 +118,23 @@ USE_L10N = True
 USE_TZ = True
 
 
+REST_FRAMEWORK = {
+    'DEFAULT_PARSER_CLASSES': [
+        'rest_framework.parsers.JSONParser',
+        'rest_framework.parsers.FormParser',
+        'rest_framework.parsers.MultiPartParser',
+    ]
+}
+
+
 # Static files (CSS, JavaScript, Images)
 
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'app/build/','static')]
-STATIC_ROOT = os.path.join(BASE_DIR,'app/build/', 'staticroot/')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'app/build/', 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'app/build/', 'staticroot/')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-
 
 
 CORS_ALLOW_ALL_ORIGINS = True

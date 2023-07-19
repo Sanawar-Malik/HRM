@@ -3,12 +3,14 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { FiSettings } from "react-icons/fi";
 import Tooltip from "@mui/material/Tooltip";
 //import Button from '@mui/material/Button'
-import PrivateRoute from './utils/PrivateRoute'
-import { Navbar, Footer, Sidebar, Home } from './components';
-import { Employee, Login } from './pages';
+import { Navbar, Sidebar, Home } from './components';
+import { Employee, Login, Signup, Dashboard } from './pages';
 import { useStateContext } from './contexts/ContextProvider';
+import { Navigate } from 'react-router-dom';
+import './App.css';
+import { useSelector } from "react-redux";
 const App = () => {
-
+  const { access_token } = useSelector(state => state.auth)
   const { activeMenu } = useStateContext();
 
   //useEffect(() => {
@@ -24,32 +26,20 @@ const App = () => {
     <div>
       <BrowserRouter>
         <div className="flex relative dark:bg-main-dark-bg">
-          <div className="fixed right-4 bottom-4" style={{ zIndex: '1000' }}>
-            <Tooltip
-              content="Settings"
-              position="Top"
-            >
-              <FiSettings />
 
-
-
-
-
-            </Tooltip>
-          </div>
           {activeMenu ? (
-            <div className="w-40 fixed sidebar dark:bg-secondary-dark-bg bg-black ">
-              <Sidebar />
+            <div className="w-48 fixed sidebar dark:bg-secondary-dark-bg bg-white "><Sidebar />
             </div>
           ) : (
             <div className="w-0 dark:bg-secondary-dark-bg">
+
               <Sidebar />
             </div>
           )}
           <div
             className={
               activeMenu
-                ? 'dark:bg-main-dark-bg  bg-main-bg min-h-screen md:ml-72 w-full  '
+                ? 'dark:bg-main-dark-bg  bg-white min-h-screen md:ml-48 w-full  '
                 : 'bg-main-bg dark:bg-main-dark-bg  w-full min-h-screen flex-2 '
             }
           >
@@ -59,20 +49,18 @@ const App = () => {
             <div>
 
               <Routes>
-                <PrivateRoute exact path="/" element={<Home />} />
+                <Route exact path="/" element={<Home />}>
+                </Route>
                 <Route exact path="/employee" element={<Employee />} />
-                <Route exact path="/login" element={<Login />} />
-
-
-
-
+                <Route exact path="/signup" element={<Signup />} />
+                <Route exact path='/login' element={!access_token ? <Login /> : <Navigate to='/dashboard' />} />
+                <Route exact path='/dashboard' element={access_token ? <Dashboard /> : <Navigate to="/login" />} />
               </Routes>
             </div>
-            <Footer />
           </div>
         </div>
-      </BrowserRouter>
-    </div>
+      </BrowserRouter >
+    </div >
   );
 };
 
