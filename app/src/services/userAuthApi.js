@@ -10,9 +10,6 @@ export const userAuthapi = createApi({
           url: 'register/',
           method: 'POST',
           body: user,
-          headers: {
-            'Content-Type': 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW',
-          }
         }
       }
     }),

@@ -9,6 +9,8 @@ import GroupIcon from '@mui/icons-material/Group';
 import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
 import GridViewOutlinedIcon from '@mui/icons-material/GridViewOutlined';
+import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
+import HomeIcon from '@mui/icons-material/Home';
 import { useDispatch } from 'react-redux';
 import { unSetUserToken } from '../featuers/authSlice';
 import { removeToken } from '../services/localStorage';
@@ -74,6 +76,26 @@ const Sidebar = () => {
               <GroupIcon />
               <span className="capitalize ">Employees</span>
             </NavLink>
+            <NavLink to="/department"
+              onClick={handleCloseSideBar}
+              style={({ isActive }) => ({
+                backgroundColor: isActive ? currentColor : '',
+              })}
+              className={({ isActive }) => (isActive ? activeLink : normalLink)}
+            >
+              <HomeIcon />
+              <span className="capitalize ">Department</span>
+            </NavLink>
+            <NavLink to="/project"
+              onClick={handleCloseSideBar}
+              style={({ isActive }) => ({
+                backgroundColor: isActive ? currentColor : '',
+              })}
+              className={({ isActive }) => (isActive ? activeLink : normalLink)}
+            >
+              <LibraryBooksIcon />
+              <span className="capitalize ">Project</span>
+            </NavLink>
             <NavLink to=""
               onClick={handleLogout}
               style={({ isActive }) => ({
@@ -84,7 +106,6 @@ const Sidebar = () => {
               <LockIcon />
               <span className="capitalize ">Logout</span>
             </NavLink>
-
           </div>
             : <div className="mt-10 ">
               <NavLink to="/login"

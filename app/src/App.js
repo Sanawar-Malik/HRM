@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Navbar, Sidebar, Home } from './components';
-import { Employee, Login, Signup, Dashboard } from './pages';
+import { Employee, Login, Signup, Dashboard, Project, Department } from './pages';
 import { useStateContext } from './contexts/ContextProvider';
 import { Navigate } from 'react-router-dom';
 import './App.css';
@@ -34,6 +34,8 @@ const App = () => {
                 <Route exact path="/" element={<Home />}>
                 </Route>
                 <Route exact path="/employee" element={<Employee />} />
+                <Route exact path="/department" element={<Department />} />
+                <Route exact path="/project" element={<Project />} />
                 <Route exact path="/signup" element={<Signup />} />
                 <Route exact path='/login' element={!access_token ? <Login /> : <Navigate to='/dashboard' />} />
                 <Route exact path='/dashboard' element={access_token ? <Dashboard /> : <Navigate to="/login" />} />

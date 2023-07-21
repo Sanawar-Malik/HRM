@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import CloseIcon from '@mui/icons-material/Close';
 import { useNavigate } from 'react-router-dom';
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
-const Employee = () => {
+const Project = () => {
   const [server_error, setServerError] = useState({})
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ const Employee = () => {
               <div className="relative w-4/5 sm mx-auto bg-white my-10">
                 <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                   <div className="flex items-start justify-between p-2 border-b bg-light-gray border-solid border-gray-300 rounded-t ">
-                    <h3 className="text-3xl font-semibold">Employees</h3>
+                    <h3 className="text-3xl font-semibold">Project</h3>
                     <button
                       className="bg-transparent border-0 text-black float-right"
                       onClick={() => setShowModal(false)}
@@ -120,7 +120,7 @@ const Employee = () => {
 
       <div className="mx-auto bg-white pb-4 mt-20 shadow-2xl rounded-md w-11/12">
         <div className="flex justify-between w-full p-4  ">
-          <h1 className="ml-3 text-2xl font-bold"> Employees</h1>
+          <h1 className="ml-3 text-2xl font-bold"> Project</h1>
           <div>
             <button onClick={() => setShowModal(true)} className="relative group">
               <div className="relative flex items-center justify-center rounded-full w-[50px] h-[40px] transform transition-all bg-white ring-0 ring-gray-300 group-focus:ring-4 ring-opacity-30 duration-200 shadow-md">
@@ -133,7 +133,7 @@ const Employee = () => {
           </div>
 
         </div>
-        <div className="w-full flex justify-start px-2 mt-2">
+        <div className="w-full flex justify-end px-2 mt-2">
           <div className="w-full sm:w-64 inline-block relative ">
             <input type="" name="" className="leading-snug border border-gray-300 block w-full appearance-none bg-white shadow-md text-sm text-gray-600 py-2 px-4 pl-8 rounded-lg" placeholder="Search" />
 
@@ -336,4 +336,4 @@ const Employee = () => {
   )
 }
 
-export default Employee
+export default Project
