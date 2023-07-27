@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 
 export const userAuthapi = createApi({
   reducerPath: 'userAuthapi',
-  baseQuery: fetchBaseQuery({ baseUrl: "http://127.0.0.1:8000/api/user/" }),
+  baseQuery: fetchBaseQuery({ baseUrl: "http://127.0.0.1:8000/api/" }),
   endpoints: (builder) => ({
     registerUser: builder.mutation({
       query: (user) => {
@@ -28,7 +28,7 @@ export const userAuthapi = createApi({
     profileUser: builder.query({
       query: (access_token) => {
         return {
-          url: 'profile',
+          url: 'profile/',
           method: 'GET',
           headers: {
             'authorization': `Bearer ${access_token}`,
@@ -40,4 +40,5 @@ export const userAuthapi = createApi({
 
   }),
 })
+
 export const { useRegisterUserMutation, useLoginUserMutation, useProfileUserQuery } = userAuthapi

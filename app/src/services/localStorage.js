@@ -2,9 +2,9 @@
 const storeToken = (value) => {
   if (value) {
     console.log("store token")
-    const { access, refresh } = value
+    const { access, refreh } = value
     localStorage.setItem('access_token', access)
-    localStorage.setItem('refresh_token', refresh)
+    localStorage.setItem('refresh_token', refreh)
   }
 }
 const getToken = () => {

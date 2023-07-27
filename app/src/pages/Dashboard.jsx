@@ -1,6 +1,9 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 
 const Dashboard = () => {
+  const my = useSelector(state => state.user)
+  console.log("my", my)
   return (
     <>
       <div className="flex flex-wrap mt-20 bg-gray-300 ">

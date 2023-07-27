@@ -15,10 +15,12 @@ import { useDispatch } from 'react-redux';
 import { unSetUserToken } from '../featuers/authSlice';
 import { removeToken } from '../services/localStorage';
 import LockIcon from '@mui/icons-material/Lock';
+import { unsetUserProfile } from '../featuers/userSlice';
 const Sidebar = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const handleLogout = () => {
+    dispatch(unsetUserProfile({ email: "", first_name: "", image: "" }))
     dispatch(unSetUserToken({ access_token: null }))
     removeToken()
     navigate('/login')
