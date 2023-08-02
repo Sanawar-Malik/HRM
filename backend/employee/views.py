@@ -13,6 +13,7 @@ from django.contrib.auth import authenticate
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.permissions import AllowAny
 from .models import Department, Project, Employee, Task
+from django.views.decorators.csrf import csrf_exempt
 #  Generate token Manually
 
 
@@ -135,8 +136,9 @@ class ProjectAPI(APIView):
 
 
 class EmployeeAPI(APIView):
+    allowed_methods = ['GET', 'POST', 'DELETE', 'PUT', 'PATCH']
     renderer_classes = [UserRenderer]
-    permission_classes = [AllowAny]
+    permission_classes = [AllowAny, IsAuthenticated]
 
     def get(self, request, pk=None, formate=None):
         id = pk

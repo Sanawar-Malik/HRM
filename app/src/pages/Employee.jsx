@@ -2,21 +2,28 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import { useDispatch, useSelector } from 'react-redux';
-import { addWorker, showEmp } from '../services/empDetailSlice';
+import { addEmployee, allEmployee } from '../services/employeeSlice';
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import EditIcon from '@mui/icons-material/Edit';
 import MyModal from './MyModal';
+import DeleteEmp from './DeleteEmp';
+import UpdateEmp from './UpdateEmp';
 
 const Employee = () => {
+
   const dispatch = useDispatch();
-  const { workers, loading } = useSelector((state) => state.app)
+  const { employees, loading } = useSelector((state) => state.app)
   const [showModal, setShowModal] = useState();
+  const [DeleteModal, setDeleteModal] = useState();
+  const [UpdateModal, setUpdateModal] = useState();
+  const [id, setId] = useState();
   const navigate = useNavigate();
   useEffect(() => {
-    dispatch(showEmp());
-  }, [])
+    dispatch(allEmployee());
+  }, []);
+  console.log("result", employees)
   return (
     <>
       <div className="mx-auto bg-white pb-4 mt-20 shadow-2xl rounded-md w-11/12">
@@ -68,8 +75,8 @@ const Employee = () => {
                 </tr>
               </thead>
               <tbody>
-                {workers && workers.map((ele) => (
-                  <tr>
+                {employees && employees.map((ele, i) => (
+                  <tr key={i}>
                     <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                       <div className="flex items-center">
                         <div className="flex-shrink-0 w-10 h-10">
@@ -94,18 +101,17 @@ const Employee = () => {
                     <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                       <div class="flex  gap-4">
                         <Tooltip title="Edit">
-                          <IconButton>
+                          <IconButton onClick={() => setUpdateModal(true)}>
                             <EditIcon />
                           </IconButton>
                         </Tooltip>
+                        {UpdateModal && <UpdateEmp id={ele.id} setUpdateModal={setUpdateModal} />}
                         <Tooltip title="Delete">
-                          <IconButton onClick={() => setShowModal(true)}>
+                          <IconButton onClick={() => setDeleteModal(true)}>
                             <DeleteIcon />
                           </IconButton>
-                          {showModal && <MyModal setShowModal={setShowModal} />}
-
                         </Tooltip>
-                        {showModal && <MyModal setShowModal={setShowModal} />}
+                        {DeleteModal && <DeleteEmp id={ele.id} setDeleteModal={setDeleteModal} />}
 
                       </div>                   </td>
                   </tr>

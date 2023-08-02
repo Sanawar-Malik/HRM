@@ -13,6 +13,7 @@ from django.contrib.auth import authenticate
 from rest_framework.permissions import IsAuthenticated
 from .models import User
 from rest_framework.parsers import MultiPartParser, FormParser
+from django.views.decorators.csrf import csrf_exempt
 #  Generate token Manually
 
 
@@ -27,6 +28,7 @@ def get_tokens_for_user(user):
 
 
 class UserRegistrationView(APIView):
+    allowed_methods = ['GET', 'POST', 'DELETE', 'PUT', 'PATCH']
     parser_classes = (MultiPartParser, FormParser)
     renderer_classes = [UserRenderer]
 
@@ -40,6 +42,7 @@ class UserRegistrationView(APIView):
 
 
 class UserLoginView(APIView):
+    allowed_methods = ['POST']
     renderer_classes = [UserRenderer]
 
     def post(self, request, formate=None):

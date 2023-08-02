@@ -23,7 +23,7 @@ class EmployeeAdmin(admin.ModelAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'first_name', 'last_name', 'gender', 'phone', 'address', 'password1', 'password2', 'image', 'date_of_birth', 'degree', 'country', 'city'),
+            'fields': ('email', 'id', 'first_name', 'last_name', 'gender', 'phone', 'address', 'password1', 'password2', 'image', 'date_of_birth', 'degree', 'country', 'city'),
         }),
     )
 
