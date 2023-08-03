@@ -7,8 +7,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { updateEmployee } from '../services/employeeSlice';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-const UpdateEmp = () => {
-  const { id } = useParams();
+const UpdateEmp = ({ setUpdateModal, id }) => {
+  // const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [server_error, setServerError] = useState({})
@@ -106,7 +106,7 @@ const UpdateEmp = () => {
           <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
             <div className="flex items-start justify-between p-2 border-b bg-light-gray border-solid border-gray-300 rounded-t ">
               <h3 className="text-3xl font-semibold">Edit Employee</h3>
-              <button className="bg-transparent border-0 text-black float-right" >
+              <button className="bg-transparent border-0 text-black float-right" onClick={() => setUpdateModal(false)}>
                 <CloseIcon />
               </button>
             </div>
@@ -202,26 +202,25 @@ const UpdateEmp = () => {
                   <label htmlfor="image" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Profile</label>
                   {server_error.image ? <p className='text-sm text-red-400'>{server_error.image[0]}</p> : ""}
                 </div>
-                <div className="relative flex  flex-col  justify-center">
-                  <button className="bg-gradient-to-b w-max mx-auto text-blue-500 font-semibold from-slate-50 to-blue-100 px-10 py-2 rounded-2xl shadow-blue-400 shadow-md border-b-4 hover border-b border-blue-200 hover:shadow-sm transition-all duration-500">Register</button>
+                <div className="flex items-center justify-end p-2 border-t border-solid border-blueGray-200 rounded-b">
+                  <button
+                    className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1"
+                    type="button"
+                    onClick={() => setUpdateModal(false)}
+                  >
+                    Close
+                  </button>
+                  <button
+                    className="text-white bg-yellow-500 active:bg-yellow-700 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
+                    type="button"
+                  >
+                    Submit
+                  </button>
+
                 </div>
                 {server_error.non_field_errors ? <Alert severity="error">This is an error alert — check it out!</Alert> : ""}
 
               </form>                  </div>
-            <div className="flex items-center justify-end p-2 border-t border-solid border-blueGray-200 rounded-b">
-              <button
-                className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1"
-                type="button"
-              >
-                Close
-              </button>
-              <button
-                className="text-white bg-yellow-500 active:bg-yellow-700 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
-                type="button"
-              >
-                Submit
-              </button>
-            </div>
           </div>
         </div>
       </div>

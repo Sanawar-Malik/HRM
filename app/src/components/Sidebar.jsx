@@ -33,7 +33,7 @@ const Sidebar = () => {
     }
   };
 
-  const activeLink = 'flex items-center text-center gap-5 pl-2 pt-2 pb-2 rounded-lg  font-bold text-fuchsia-600 - purple-600  text-md m-2 bg-white';
+  const activeLink = 'flex items-center text-center gap-5 pl-2 pt-2 pb-2 rounded-lg  font-bold text-white   text-md m-2 bg-blue-700';
   const normalLink = 'flex items-center gap-5 pl-2 pt-2 pb-2 rounded-lg font-bold text-sm  text-black bg-slate-50 text-black hover:bg-light-gray m-2';
 
   return (

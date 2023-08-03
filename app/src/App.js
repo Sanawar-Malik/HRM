@@ -1,11 +1,12 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Navbar, Sidebar, Home } from './components';
-import { Employee, Login, Signup, Dashboard, Project, Department, UpdateEmp } from './pages';
+import { Login, Signup, Dashboard, Project, Department, } from './pages';
 import { useStateContext } from './contexts/ContextProvider';
 import { Navigate } from 'react-router-dom';
 import './App.css';
 import { useSelector } from "react-redux";
+import Employee from './Employee/Employee';
 const App = () => {
   const { access_token } = useSelector(state => state.auth)
   const { activeMenu } = useStateContext();
@@ -33,7 +34,6 @@ const App = () => {
               <Routes>
                 <Route exact path="/" element={<Home />}>
                 </Route>
-                <Route exact path="/edit/:id/" element={<UpdateEmp />} />
                 <Route exact path="/employee" element={<Employee />} />
                 <Route exact path="/department" element={<Department />} />
                 <Route exact path="/project" element={<Project />} />

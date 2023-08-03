@@ -9,6 +9,7 @@ import Tooltip from '@mui/material/Tooltip';
 import EditIcon from '@mui/icons-material/Edit';
 import MyModal from './MyModal';
 import DeleteEmp from './DeleteEmp';
+import UpdateEmp from './UpdateEmp';
 
 const Employee = () => {
 
@@ -16,7 +17,7 @@ const Employee = () => {
   const { employees, loading } = useSelector((state) => state.app)
   const [showModal, setShowModal] = useState();
   const [DeleteModal, setDeleteModal] = useState();
-
+  const [UpdateModel, setUpdateModal] = useState();
   const [id, setId] = useState();
   const navigate = useNavigate();
   useEffect(() => {
@@ -25,13 +26,13 @@ const Employee = () => {
   console.log("result", employees)
   return (
     <>
-      <div className="mx-auto bg-white pb-4 mt-20 shadow-2xl rounded-md w-11/12">
+      <div className="mx-auto bg-white pb-4 mt-10 shadow-2xl rounded-md w-11/12">
         <div className="flex justify-between w-full p-4  ">
           <h1 className="ml-3 text-2xl font-bold"> Employee</h1>
           <div>
             <button onClick={() => setShowModal(true)} className="relative group">
-              <div className="relative flex items-center justify-center rounded-full w-[50px] h-[40px] transform transition-all bg-white ring-0 ring-gray-300 group-focus:ring-4 ring-opacity-30 duration-200 shadow-md">
-                <div className="flex flex-col justify-between w-[20px] h-[20px] transform transition-all duration-300 group-focus:-rotate-[45deg] origin-center">
+              <div className="relative flex items-center text-white bg-blue-700 justify-center rounded-full w-[50px] h-[40px] transform transition-all ring-0 ring-gray-300 group-focus:ring-4 ring-opacity-30 duration-200 shadow-md">
+                <div className="flex flex-col  justify-between w-[20px] h-[20px] transform transition-all duration-300 group-focus:-rotate-[45deg] origin-center">
                   <PersonAddAltIcon />         </div>
               </div>
             </button>
@@ -56,7 +57,7 @@ const Employee = () => {
               <thead>
                 <tr>
                   <th
-                    className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-900 uppercase tracking-wider">
+                    className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-sm font-bold text-gray-900 uppercase tracking-wider">
                     User
                   </th>
                   <th
@@ -71,6 +72,24 @@ const Employee = () => {
                     className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                     Actions
                   </th>
+                  <th
+                    className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    Actions
+                  </th>
+                  <th
+                    className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    Actions
+                  </th>
+                  <th
+                    className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    Actions
+                  </th>
+                  <th
+                    className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    Actions
+                  </th>
+
+
                 </tr>
               </thead>
               <tbody>
@@ -98,14 +117,14 @@ const Employee = () => {
                         {ele.degree}                    </p>
                     </td>
                     <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                      <div class="flex  gap-4">
-                        <NavLink to={`/edit/${ele.id}/`}>
-                          <Tooltip title="Edit">
-                            <IconButton >
-                              <EditIcon />
-                            </IconButton>
-                          </Tooltip>
-                        </NavLink>
+                      <div className="flex  gap-4">
+                        <Tooltip title="Edit" onClick={() => setUpdateModal(true)}>
+                          <IconButton >
+                            <EditIcon />
+                          </IconButton>
+                        </Tooltip>
+                        {UpdateModel && <UpdateEmp id={ele.id} setUpdateModal={setUpdateModal} />}
+
                         <Tooltip title="Delete">
                           <IconButton onClick={() => setDeleteModal(true)}>
                             <DeleteIcon />

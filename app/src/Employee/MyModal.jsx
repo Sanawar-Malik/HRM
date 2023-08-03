@@ -44,20 +44,20 @@ const MyModal = ({ setShowModal }) => {
     dispatch(addEmployee(formData, access_token))
 
 
-    //   const res = dispatch(addWorker(formData, access_token));
-    //   console.log(res)
-    //
-    //   if (res.error) {
-    //     console.log(typeof (res.error.data.errors))
-    //     console.log(res.error.data.errors)
-    //     setServerError(res.error.data.errors)
-    //   }
-    //   if (res.data) {
-    //     console.log(typeof (res.data))
-    //     console.log(res.data)
-    //     storeToken(res.data.token)
-    //     navigate("/dashboard")
-    //   }
+    const res = dispatch(addEmployee(formData, access_token));
+    console.log(res)
+
+    if (res.error) {
+      console.log(typeof (res.error.data.errors))
+      console.log(res.error.data.errors)
+      setServerError(res.error.data.errors)
+    }
+    if (res.data) {
+      console.log(typeof (res.data))
+      console.log(res.data)
+      // storeToken(res.data.token)
+      // navigate("/dashboard")
+    }
   }
 
   return (
@@ -73,7 +73,7 @@ const MyModal = ({ setShowModal }) => {
               </button>
             </div>
             {server_error.non_field_errors ? console.log(server_error.non_field_errors[0]) : ""}
-            <div className="relative p-6 mt-4 flex-auto h-[500px] overflow-auto">
+            <div className="relative p-6 mt-2 flex-auto h-[500px] overflow-auto">
               <form onSubmit={handleSubmit}>
                 <div className="grid xl:grid-cols-2 xl:gap-6">
                   <div className="relative z-0 mb-6 w-full group">
@@ -165,27 +165,11 @@ const MyModal = ({ setShowModal }) => {
                   {server_error.image ? <p className='text-sm text-red-400'>{server_error.image[0]}</p> : ""}
                 </div>
                 <div className="relative flex  flex-col  justify-center">
-                  <button className="bg-gradient-to-b w-max mx-auto text-blue-500 font-semibold from-slate-50 to-blue-100 px-10 py-2 rounded-2xl shadow-blue-400 shadow-md border-b-4 hover border-b border-blue-200 hover:shadow-sm transition-all duration-500">Register</button>
+                  <button className="bg-blue-700 w-max mx-auto text-white font-semibold from-slate-50 to-blue-100 px-10 py-2 rounded-2xl shadow-blue-400 shadow-md border-b-4 hover border-b border-blue-200 hover:shadow-sm transition-all duration-500">Register</button>
                 </div>
                 {server_error.non_field_errors ? <Alert severity="error">This is an error alert — check it out!</Alert> : ""}
 
               </form>                  </div>
-            <div className="flex items-center justify-end p-2 border-t border-solid border-blueGray-200 rounded-b">
-              <button
-                className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1"
-                type="button"
-                onClick={() => setShowModal(false)}
-              >
-                Close
-              </button>
-              <button
-                className="text-white bg-yellow-500 active:bg-yellow-700 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
-                type="button"
-                onClick={() => setShowModal(false)}
-              >
-                Submit
-              </button>
-            </div>
           </div>
         </div>
       </div>
