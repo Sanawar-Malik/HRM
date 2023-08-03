@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { deleteEmployee } from '../services/employeeSlice';
 const DeleteEmp = ({ setDeleteModal, id }) => {
   const dispatch = useDispatch();
+  console.log("id delete", id)
 
 
 

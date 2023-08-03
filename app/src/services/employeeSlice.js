@@ -30,7 +30,9 @@ export const allEmployee = createAsyncThunk("allEmployee", async () => {
     },
   };
   const response = await axios.get("http://127.0.0.1:8000/api/emp/", config);
+  console.log(response.data);
   return response.data
+
 });
 
 
@@ -52,7 +54,18 @@ export const deleteEmployee = createAsyncThunk("deleteEmployee", async (id, { re
   }
 });
 
-
+export const updateEmployee = createAsyncThunk("updateEmployee", async ({ formData, id }) => {
+  console.log("formData", formData);
+  const { access_token } = getToken();
+  const config = {
+    headers: {
+      'authorization': `Bearer ${access_token}`,
+      'Content-Type': 'multipart/form-data',
+    },
+  };
+  const response = await axios.put(`http://127.0.0.1:8000/api/emp/${id}/`, formData, config);
+  return response.data;
+});
 
 
 
@@ -103,6 +116,18 @@ export const employeeDetail = createSlice({
 
     },
     [deleteEmployee.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+
+    },
+    [updateEmployee.pending]: (state) => {
+      state.loading = true;
+    },
+    [updateEmployee.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.employees = action.payload;
+    },
+    [updateEmployee.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.payload;
 

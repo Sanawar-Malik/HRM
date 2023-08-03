@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import { useDispatch, useSelector } from 'react-redux';
 import { addEmployee, allEmployee } from '../services/employeeSlice';
@@ -9,7 +9,6 @@ import Tooltip from '@mui/material/Tooltip';
 import EditIcon from '@mui/icons-material/Edit';
 import MyModal from './MyModal';
 import DeleteEmp from './DeleteEmp';
-import UpdateEmp from './UpdateEmp';
 
 const Employee = () => {
 
@@ -17,7 +16,7 @@ const Employee = () => {
   const { employees, loading } = useSelector((state) => state.app)
   const [showModal, setShowModal] = useState();
   const [DeleteModal, setDeleteModal] = useState();
-  const [UpdateModal, setUpdateModal] = useState();
+
   const [id, setId] = useState();
   const navigate = useNavigate();
   useEffect(() => {
@@ -100,12 +99,13 @@ const Employee = () => {
                     </td>
                     <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                       <div class="flex  gap-4">
-                        <Tooltip title="Edit">
-                          <IconButton onClick={() => setUpdateModal(true)}>
-                            <EditIcon />
-                          </IconButton>
-                        </Tooltip>
-                        {UpdateModal && <UpdateEmp id={ele.id} setUpdateModal={setUpdateModal} />}
+                        <NavLink to={`/edit/${ele.id}/`}>
+                          <Tooltip title="Edit">
+                            <IconButton >
+                              <EditIcon />
+                            </IconButton>
+                          </Tooltip>
+                        </NavLink>
                         <Tooltip title="Delete">
                           <IconButton onClick={() => setDeleteModal(true)}>
                             <DeleteIcon />

@@ -23,8 +23,8 @@ class Employee(models.Model):
     degree = models.CharField(max_length=200)
     department = models.ForeignKey(
         "Department", blank=True, null=True, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to="", blank=True)
-    file = models.FileField(upload_to="files/", blank=True)
+    image = models.ImageField(upload_to="", null=True, blank=True)
+    file = models.FileField(upload_to="files/", null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
 
