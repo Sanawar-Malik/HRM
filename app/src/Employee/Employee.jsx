@@ -26,12 +26,12 @@ const Employee = () => {
   console.log("result", employees)
   return (
     <>
-      <div className="mx-auto bg-white pb-4 mt-10 shadow-2xl rounded-md w-11/12">
+      <div className="mx-auto bg-white pb-4 mt-20 shadow-2xl rounded-md w-11/12">
         <div className="flex justify-between w-full p-4  ">
           <h1 className="ml-3 text-2xl font-bold"> Employee</h1>
           <div>
             <button onClick={() => setShowModal(true)} className="relative group">
-              <div className="relative flex items-center text-white bg-blue-700 justify-center rounded-full w-[50px] h-[40px] transform transition-all ring-0 ring-gray-300 group-focus:ring-4 ring-opacity-30 duration-200 shadow-md">
+              <div className="relative flex items-center text-white bg-gradient-to-r from-fuchsia-600 to-purple-600 justify-center rounded-full w-[50px] h-[40px] transform transition-all ring-0 ring-gray-300 group-focus:ring-4 ring-opacity-30 duration-200 shadow-md">
                 <div className="flex flex-col  justify-between w-[20px] h-[20px] transform transition-all duration-300 group-focus:-rotate-[45deg] origin-center">
                   <PersonAddAltIcon />         </div>
               </div>
@@ -41,7 +41,7 @@ const Employee = () => {
         </div>
         <div className="w-full flex justify-end px-2 mt-2">
           <div className="w-full sm:w-64 inline-block relative ">
-            <input type="" name="" className="leading-snug border border-gray-300 block w-full appearance-none bg-white shadow-md text-sm text-gray-600 py-2 px-4 pl-8 rounded-lg" placeholder="Search" />
+            <input type="" name="" className="leading-snug border border-pink-50 block w-full appearance-none bg-white shadow-md text-sm text-gray-600 py-2 px-4 pl-8 rounded-lg" placeholder="Search" />
 
             <div className="pointer-events-none absolute pl-3 inset-y-0 left-0 flex items-center px-2 text-gray-300">
 
@@ -57,35 +57,28 @@ const Employee = () => {
               <thead>
                 <tr>
                   <th
-                    className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-sm font-bold text-gray-900 uppercase tracking-wider">
+                    className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-bold text-gray-900 uppercase tracking-wider">
                     User
                   </th>
                   <th
-                    className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">
                     Email
                   </th>
                   <th
-                    className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">
                     Degree
                   </th>
                   <th
-                    className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                    Actions
+                    className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">
+                    Department
+                  </th>
+
+                  <th
+                    className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">
+                    Gender
                   </th>
                   <th
-                    className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                    Actions
-                  </th>
-                  <th
-                    className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                    Actions
-                  </th>
-                  <th
-                    className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                    Actions
-                  </th>
-                  <th
-                    className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">
                     Actions
                   </th>
 
@@ -95,7 +88,7 @@ const Employee = () => {
               <tbody>
                 {employees && employees.map((ele, i) => (
                   <tr key={i}>
-                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                    <td className="px-5 py-2 border-b border-gray-200 bg-white">
                       <div className="flex items-center">
                         <div className="flex-shrink-0 w-10 h-10">
                           <img className="w-full h-full rounded-full"
@@ -103,21 +96,33 @@ const Employee = () => {
                             alt="" />
                         </div>
                         <div className="ml-3">
-                          <p className="text-black text-md text-semibold capitalize whitespace-no-wrap">
+                          <p className="text-black text-md font-semibold capitalize whitespace-no-wrap">
                             {ele.first_name}
                           </p>
                         </div>
                       </div>
                     </td>
-                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                      <p className="text-gray-900 whitespace-no-wrap">{ele.email}</p>
+                    <td className="px-5 py-2 border-b border-gray-200 bg-white ">
+                      <p className="text-black whitespace-no-wrap">{ele.email}</p>
                     </td>
-                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                      <p className="text-gray-900 whitespace-no-wrap">
+                    <td className="px-5 py-2 border-b border-gray-200 bg-white">
+                      <p className=" whitespace-no-wrap">
                         {ele.degree}                    </p>
                     </td>
-                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                      <div className="flex  gap-4">
+                    <td className="px-5 py-2 border-b border-gray-200 bg-white">
+                      <p className="whitespace-no-wrap">
+                        {ele.department}                    </p>
+                    </td>
+
+
+
+                    <td className="px-5 py-2 border-b border-gray-200 bg-white">
+                      <p className=" whitespace-no-wrap">
+                        {ele.gender}                    </p>
+                    </td>
+
+                    <td className="px-5 py-2 border-b border-gray-200 bg-white ">
+                      <div className="flex gap-4">
                         <Tooltip title="Edit" onClick={() => setUpdateModal(true)}>
                           <IconButton >
                             <EditIcon />
@@ -126,11 +131,11 @@ const Employee = () => {
                         {UpdateModel && <UpdateEmp id={ele.id} setUpdateModal={setUpdateModal} />}
 
                         <Tooltip title="Delete">
-                          <IconButton onClick={() => setDeleteModal(true)}>
+                          <IconButton onClick={() => [setId(ele.id), setDeleteModal(true)]}>
                             <DeleteIcon />
                           </IconButton>
                         </Tooltip>
-                        {DeleteModal && <DeleteEmp id={ele.id} setDeleteModal={setDeleteModal} />}
+                        {DeleteModal && <DeleteEmp id={id} setDeleteModal={setDeleteModal} />}
 
                       </div>                   </td>
                   </tr>

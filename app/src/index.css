@@ -11,4 +11,16 @@ body{
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+input[type="password"]:focus ~ .input-text,
+input[type="password"]:not(:placeholder-shown) ~ .input-text{
+  @apply text-fuchsia-600 transform -translate-y-6 -translate-x-2 scale-75;
+}
 
+input[type="text"]:focus ~ .input-text,
+input[type="text"]:not(:placeholder-shown) ~ .input-text{
+  @apply text-fuchsia-600  transform -translate-y-6 -translate-x-2 scale-75;
+}
+input[type="file"]:focus ~ .input-file,
+input[type="file"]:not(:placeholder-shown) ~ .input-file{
+  @apply text-gray-500  transform -translate-y-8 -translate-x-2 scale-75;
+}

@@ -17,15 +17,21 @@ const App = () => {
         <div className="flex relative">
 
           {activeMenu ? (
-            <div className="w-48 fixed sidebar bg-white "><Sidebar />
+            <div className="w-48 fixed sidebar bg-gray-900 "><Sidebar />
             </div>
           ) : (
-            <div className="w-0 dark:bg-secondary-dark-bg">
+            <div className="w-0 dark:bg-secondary-dark-bg z-auto">
 
               <Sidebar />
             </div>
           )}
-          <div className="bg-gradient-to-r from-fuchsia-50 via-gray-50 to-slate-100 to-stone-50 min-h-screen md:ml-48 w-full " >
+          <div
+            className={
+              activeMenu
+                ? 'bg-gradient-to-r from-slate-100 to-zinc-100 min-h-screen md:ml-52 w-full  '
+                : 'bg-main-bg dark:bg-main-dark-bg  w-full min-h-screen flex-2 '
+            }
+          >
             <div className="fixed md:static navbar w-full ">
               <Navbar />
             </div>
