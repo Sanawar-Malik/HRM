@@ -3,7 +3,7 @@ from pathlib import Path
 from datetime import timedelta
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-# 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
+# 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
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -42,7 +42,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -75,13 +75,13 @@ WSGI_APPLICATION = 'main.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'hrm',
+        'NAME': 'hussain',
         'USER': 'root',
         'PASSWORD': 'password',
-        'HOST':'localhost',
-        'PORT':'5432'
+        'HOST': 'localhost',
+        'PORT': '5432'
     }
-    
+
 }
 # DATABASE_ROUTERS = ['account.router.AuthRouter', 'worker.router.ListingRouter']
 
@@ -118,20 +118,26 @@ USE_L10N = True
 USE_TZ = True
 
 
+REST_FRAMEWORK = {
+    'DEFAULT_PARSER_CLASSES': [
+        'rest_framework.parsers.JSONParser',
+        'rest_framework.parsers.FormParser',
+        'rest_framework.parsers.MultiPartParser',
+    ]
+}
+
+
 # Static files (CSS, JavaScript, Images)
 
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'app/build/','static')]
-STATIC_ROOT = os.path.join(BASE_DIR,'app/build/', 'staticroot/')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'app/build/', 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'app/build/', 'staticroot/')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
-
-
 CORS_ALLOW_ALL_ORIGINS = True
-
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:3000',
 )
@@ -150,7 +156,7 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=1),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
 
     "AUTH_HEADER_TYPES": ("Bearer",),
@@ -165,10 +171,4 @@ SIMPLE_JWT = {
 
     "JTI_CLAIM": "jti",
 
-    "TOKEN_OBTAIN_SERIALIZER": "rest_framework_simplejwt.serializers.TokenObtainPairSerializer",
-    "TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSerializer",
-    "TOKEN_VERIFY_SERIALIZER": "rest_framework_simplejwt.serializers.TokenVerifySerializer",
-    "TOKEN_BLACKLIST_SERIALIZER": "rest_framework_simplejwt.serializers.TokenBlacklistSerializer",
-    "SLIDING_TOKEN_OBTAIN_SERIALIZER": "rest_framework_simplejwt.serializers.TokenObtainSlidingSerializer",
-    "SLIDING_TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSlidingSerializer",
 }

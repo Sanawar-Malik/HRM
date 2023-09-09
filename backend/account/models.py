@@ -1,8 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 
+
 class UserManager(BaseUserManager):
-    def create_user(self, email, first_name,last_name,gender,phone,address,image, password=None, password2= None):
+    def create_user(self, email, first_name, last_name, gender, phone, address, image, password=None, password2=None):
         """
         Creates and saves a User with the given email, name, tc, password and password2.
         """
@@ -11,19 +12,19 @@ class UserManager(BaseUserManager):
 
         user = self.model(
             email=self.normalize_email(email),
-            first_name = first_name,
-            last_name = last_name,
-            gender =gender,
-            phone = phone,
-            address = address,
-            image = image,
+            first_name=first_name,
+            last_name=last_name,
+            gender=gender,
+            phone=phone,
+            address=address,
+            image=image,
         )
 
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, first_name, last_name, gender,phone,address,image, password=None):
+    def create_superuser(self, email, first_name, last_name, gender, phone, address, image, password=None):
         """
         Creates and saves a superuser with the given email, date of
         birth and password.
@@ -31,19 +32,25 @@ class UserManager(BaseUserManager):
         user = self.create_user(
             email,
             password=password,
-            first_name = first_name,
-            last_name =last_name,
-            gender = gender,
-            phone = phone,
-            address =  address,
-            image = image,
+            first_name=first_name,
+            last_name=last_name,
+            gender=gender,
+            phone=phone,
+            address=address,
+            image=image,
         )
         user.is_admin = True
         user.save(using=self._db)
         return user
 
+
+def upload_to(instance, filename):
+    return 'register/{filename}'.format(filename=filename)
+
+
 class User(AbstractBaseUser):
-    email = models.EmailField(verbose_name='Email',max_length=255, unique=True,)
+    email = models.EmailField(verbose_name='Email',
+                              max_length=255, unique=True,)
     first_name = models.CharField(max_length=200)
     last_name = models.CharField(max_length=200)
     gender = models.CharField(max_length=200)
@@ -51,13 +58,15 @@ class User(AbstractBaseUser):
     address = models.CharField(max_length=200)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
-    image = models.ImageField(upload_to="register/")
+    image = models.ImageField(
+        upload_to=upload_to, default='register/default.jpg')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name', 'last_name', 'gender','phone', 'address','image']
+    REQUIRED_FIELDS = ['first_name', 'last_name',
+                       'gender', 'phone', 'address', 'image']
 
     def __str__(self):
         return self.email
@@ -77,4 +86,3 @@ class User(AbstractBaseUser):
         "Is the user a member of staff?"
         # Simplest possible answer: All admins are staff
         return self.is_admin
-

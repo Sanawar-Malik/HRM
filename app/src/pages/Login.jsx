@@ -1,39 +1,79 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
-import { loginuser } from '../services/userDetailSlice';
+import { useLoginUserMutation } from '../services/userAuthApi';
+import { useNavigate } from 'react-router-dom';
+import { getToken, storeToken } from '../services/localStorage'
+import Alert from '@mui/material/Alert';
+import { setUserToken } from '../featuers/authSlice';
 
 const Login = () => {
-
-  const [users, setUsers] = useState({});
+  const [server_error, setServerError] = useState({})
+  const navigate = useNavigate();
+  const [loginUser, { isLoading }] = useLoginUserMutation()
   const dispatch = useDispatch()
-  const getuserdata = (e) => {
-    setUsers({ ...users, [e.target.name]: e.target.value })
-
-  };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("users...", users)
-    dispatch(loginuser(users))
+    const data = new FormData(e.currentTarget);
+    const actualData = {
+      email: data.get('email'),
+      password: data.get('password'),
+
+    }
+    const res = await loginUser(actualData)
+    if (res.error) {
+      console.log(typeof (res.error.data.errors))
+      console.log(res.error.data.errors)
+      setServerError(res.error.data.errors)
+    }
+    if (res.data) {
+      console.log(typeof (res.data))
+      console.log(res.data)
+      storeToken(res.data.token)
+      let { access_token } = getToken()
+      dispatch(setUserToken({ access_token: access_token }))
+      navigate("/dashboard")
+    }
   }
+  let { access_token } = getToken()
+  useEffect(() => {
+    dispatch(setUserToken({ access_token: access_token }))
+  }, [access_token, dispatch])
   return (
     <>
-      <div class="h-screen bg-gray-100 flex justify-center">
-        <div class="py-6 px-8 h-75 mt-20 bg-white rounded shadow-xl">
-          <form onSubmit={handleSubmit}>
-            <div>
-              <label for="email" class="block text-gray-800 font-bold">Email:</label>
-              <input type="text" name="email" placeholder="@email" class="w-full border border-gray-300 py-2 pl-3 rounded mt-2 outline-none focus:ring-indigo-600 :ring-indigo-600" onChange={getuserdata} />
-            </div>
-            <div class="mb-6">
-              <label for="password" class="block text-gray-800 font-bold">Password:</label>
-              <input type="text" name="password" placeholder="password" class="w-full border border-gray-300 py-2 pl-3 rounded mt-2 outline-none focus:ring-indigo-600 :ring-indigo-600" onChange={getuserdata} />
-            </div>
-            <button class="cursor-pointer py-2 px-4 block mt-6 bg-indigo-500 text-white font-bold w-full text-center rounded">Login</button>
-          </form>
-        </div>
+      {server_error.non_field_errors ? console.log(server_error.non_field_errors[0]) : ""}
+
+
+      <div className="max-w-2xl bg-white shadow-2xl p-4 mx-auto mt-10 pb-10">
+        <h1 className="text-2xl font-bold mt-10 mb-20 text-center">Login Form</h1>
+        <form onSubmit={handleSubmit}>
+          <div className="flex mb-8">
+            <label className='relative cursor-pointer w-full'>
+              <input type="text" name='email' id='email' placeholder="Email" className='h-12 w-full   px-6 text-gray-500 border-gray-300 border-2 rounded-lg border-opacity-50 outline-none focus:border-fuchsia-600 placeholder-gray-800 placeholder-opacity-0 transition duration-200' />
+              <span className='font-semibold text-gray-700 text-opacity-80 bg-white absolute left-5 top-3 px-1 transition  duration-200 input-text'>Email</span>
+            </label>
+            {server_error.email ? <p className='text-sm text-red-400'>{server_error.email[0]}</p> : ""}
+
+          </div>
+          <div className="flex mb-4">
+            <label className='relative cursor-pointer w-full'>
+              <input type="password" name='password' id='password' placeholder="Password" className='h-12 w-full text-xl text-gray-500  px-6 text-black border-gray-300 border-2 rounded-lg border-opacity-50 outline-none focus:border-fuchsia-600 placeholder-gray-800 placeholder-opacity-0 transition duration-200' />
+              <span className=' font-semibold text-gray-700 text-opacity-80 bg-white  absolute left-5 top-3 px-1 transition  duration-200 input-text'>Password</span>
+            </label>
+            {server_error.password ? <p className='text-sm text-red-400'>{server_error.password[0]}</p> : ""}
+
+          </div>
+
+          <div className="relative flex  flex-col  justify-center">
+            <button className="bg-gradient-to-r from-fuchsia-600 to-purple-600 w-max mx-auto text-white font-semibold px-10 py-2 rounded-2xl shadow-blue-400 shadow-md border-b-4 hover border-b border-blue-200 hover:shadow-sm transition-all duration-500">Submit</button>
+          </div>
+
+          {server_error.non_field_errors ? <Alert severity='error'>{server_error.non_field_errors[0]}</Alert> : ""}
+        </form>
       </div>
+
+
+
     </>
   )
 }
-
 export default Login
